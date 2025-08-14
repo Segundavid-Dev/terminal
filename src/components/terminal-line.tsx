@@ -1,13 +1,12 @@
 import type { terminalProps } from "../../types";
 import type { FC } from "react";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 
 const TerminalLine: FC<terminalProps> = ({ commandPrompt, data }) => {
-  // on component mount, cursor should be highlighted
+  const [value, setValue] = useState<string>("");
   const inputRef = useRef<null | HTMLInputElement>(null);
 
   useEffect(() => {
-    // set cursor to active on mount
     inputRef?.current?.focus();
   });
 
@@ -18,7 +17,14 @@ const TerminalLine: FC<terminalProps> = ({ commandPrompt, data }) => {
         <p style={{ fontSize: "14px", color: "#6a7282" }}>$ {commandPrompt}</p>
       )}
 
-      {data === "input" && <input type="text" ref={inputRef} />}
+      {data === "input" && (
+        <input
+          type="text"
+          ref={inputRef}
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+        />
+      )}
     </form>
   );
 };

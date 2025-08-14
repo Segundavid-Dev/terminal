@@ -17,4 +17,10 @@ input {
   font-weight: bold;
   width: 100%;
   caret-color: #00b4d8;
+  caret-shape: block;
+  position: relative;
+}
+
+input:focus {
+  caret-color: #00b4d8;
 }
