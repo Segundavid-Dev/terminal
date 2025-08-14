@@ -1,0 +1,3 @@
+project: 
+    - [ ] Display default command prompt
+    - [x] command help to output catalog of commands

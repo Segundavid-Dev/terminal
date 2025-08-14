@@ -2,4 +2,8 @@
 
 body {
   font-family: "Source Code Pro", monospace;
+  width: 1120px;
+  margin: 2rem auto;
+  background-color: #111;
+  color: #fff;
 }
