@@ -4,10 +4,11 @@ import { useRef, useEffect } from "react";
 
 const TerminalLine: FC<terminalProps> = ({ commandPrompt, data }) => {
   // on component mount, cursor should be highlighted
-  const inputRef = useRef();
+  const inputRef = useRef<null | HTMLInputElement>(null);
 
   useEffect(() => {
-    console.log("hello world");
+    // set cursor to active on mount
+    inputRef?.current?.focus();
   });
 
   return (
@@ -17,7 +18,7 @@ const TerminalLine: FC<terminalProps> = ({ commandPrompt, data }) => {
         <p style={{ fontSize: "14px", color: "#6a7282" }}>$ {commandPrompt}</p>
       )}
 
-      {data === "input" && <input type="text" />}
+      {data === "input" && <input type="text" ref={inputRef} />}
     </form>
   );
 };
