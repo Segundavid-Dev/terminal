@@ -1,5 +1,5 @@
 export type terminalProps = {
   id: string;
-  text?: string;
+  commandPrompt?: string;
   data: "input" | "output";
 };
