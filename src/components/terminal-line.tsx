@@ -1,5 +1,5 @@
 import type { terminalProps } from "../../types";
-import type { FC } from "react";
+import type { FC, FormEvent } from "react";
 import { useRef, useEffect, useState } from "react";
 
 const TerminalLine: FC<terminalProps> = ({ commandPrompt, data }) => {
@@ -10,8 +10,13 @@ const TerminalLine: FC<terminalProps> = ({ commandPrompt, data }) => {
     inputRef?.current?.focus();
   });
 
+  const handleSubmit = (e: FormEvent) => {
+    setValue("");
+    e.preventDefault();
+  };
+
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       {/* conditionally chnage input and output conditions */}
       {data === "output" && (
         <p style={{ fontSize: "14px", color: "#6a7282" }}>$ {commandPrompt}</p>

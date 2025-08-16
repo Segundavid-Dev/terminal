@@ -6,6 +6,7 @@ import type { terminalProps } from "../types";
 // specify color based on what exactly
 
 function App() {
+  // Available commands
   const [cmds, setCmds] = useState<terminalProps[]>([
     {
       id: "7413a496-261c-44b6-bd34-587d15668a08",
@@ -22,12 +23,25 @@ function App() {
       data: "input",
     },
   ]);
+
+  // command sections -> will keep adding more as time goes on
+  const commandAction = [
+    {
+      command: "help",
+      action: () => {
+        console.log("help functionality");
+      },
+    },
+  ];
+
+  const handleCommand = (command: string) => {};
   return (
     <div>
       {cmds.map((cmd) => (
         <TerminalLine
           commandPrompt={cmd.commandPrompt}
           key={cmd.id}
+          id={cmd.id}
           data={cmd.data}
         />
       ))}
