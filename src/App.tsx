@@ -27,14 +27,48 @@ function App() {
   // command sections -> will keep adding more as time goes on
   const commandAction = [
     {
-      command: "help",
+      command: "ssh help",
       action: () => {
-        console.log("help functionality");
+        setCmds((prev) => [
+          ...prev,
+          {
+            id: crypto.randomUUID(),
+            data: "output",
+            commandPrompt: "ssh signup - create new account",
+          },
+          {
+            id: crypto.randomUUID(),
+            data: "output",
+            commandPrompt: "ssh login - login to account",
+          },
+          {
+            id: crypto.randomUUID(),
+            data: "output",
+            commandPrompt: "ssh logout - logout of account",
+          },
+          {
+            id: crypto.randomUUID(),
+            data: "output",
+            commandPrompt: "ssh status - check status of your account",
+          },
+          {
+            id: crypto.randomUUID(),
+            data: "output",
+            commandPrompt: "ssh themes - change theme status of your terminal",
+          },
+        ]);
       },
     },
   ];
 
-  const handleCommand = (command: string) => {};
+  const handleCommand = (command: string) => {
+    // handle normalization of passed in commands
+    const normalizeString = command.trim().toLowerCase();
+    // get command string
+    const action = commandAction.find((cmd) => cmd.command === normalizeString);
+    // how to determine which action to carry out
+    alert(command);
+  };
   return (
     <div>
       {cmds.map((cmd) => (
@@ -43,6 +77,7 @@ function App() {
           key={cmd.id}
           id={cmd.id}
           data={cmd.data}
+          handleCommand={handleCommand}
         />
       ))}
     </div>

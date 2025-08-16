@@ -2,7 +2,11 @@ import type { terminalProps } from "../../types";
 import type { FC, FormEvent } from "react";
 import { useRef, useEffect, useState } from "react";
 
-const TerminalLine: FC<terminalProps> = ({ commandPrompt, data }) => {
+const TerminalLine: FC<terminalProps> = ({
+  commandPrompt,
+  data,
+  handleCommand,
+}) => {
   const [value, setValue] = useState<string>("");
   const inputRef = useRef<null | HTMLInputElement>(null);
 
@@ -13,6 +17,10 @@ const TerminalLine: FC<terminalProps> = ({ commandPrompt, data }) => {
   const handleSubmit = (e: FormEvent) => {
     setValue("");
     e.preventDefault();
+    // guard check to handle undefined error
+    if (handleCommand) {
+      handleCommand(value);
+    }
   };
 
   return (
