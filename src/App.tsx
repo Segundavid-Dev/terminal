@@ -62,12 +62,19 @@ function App() {
   ];
 
   const handleCommand = (command: string) => {
-    // handle normalization of passed in commands
     const normalizeString = command.trim().toLowerCase();
-    // get command string
-    const action = commandAction.find((cmd) => cmd.command === normalizeString);
-    // how to determine which action to carry out
-    alert(command);
+    const validateCommand = commandAction.find(
+      (cmd) => cmd.command === normalizeString
+    );
+    // test to get the output
+    if (validateCommand) {
+      validateCommand.action();
+    }
+    // setCmds((cmds) => {
+    //   const updated = [...cmds];
+
+    //   return updated;
+    // });
   };
   return (
     <div>
