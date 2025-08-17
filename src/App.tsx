@@ -83,14 +83,32 @@ function App() {
         commandPrompt: command,
       });
 
+      if (validateCommand) return updated;
+
+      // if command not found
+      updated.push({
+        id: crypto.randomUUID(),
+        data: "output",
+        commandPrompt: `Command not found: ${command}`,
+      });
+
+      updated.push({
+        id: crypto.randomUUID(),
+        data: "input",
+      });
+
       return updated;
     });
 
-    // setCmds((cmds) => {
-    //   const updated = [...cmds];
-
-    //   return updated;
-    // });
+    if (validateCommand) {
+      setTimeout(() => {
+        validateCommand.action();
+        setCmds((prev) => [
+          ...prev,
+          { id: crypto.randomUUID(), data: "input" },
+        ]);
+      });
+    }
   };
   return (
     <div>
