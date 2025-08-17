@@ -1,7 +1,7 @@
 project: 
     - [x] Display default command prompt
     - [x] command help to output catalog of commands
-    - [ ] Automatically set the input to be last index in Array
+    - [x] Automatically set the input to be last index in Array
     - [ ] Add more control for invalid input
     - [ ] Add color to different different command status (red ->   invalid command, blue for output help command prompts, green for account created successfully)
     - [ ] Add confetti effect for signup success

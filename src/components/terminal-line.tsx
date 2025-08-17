@@ -6,6 +6,7 @@ const TerminalLine: FC<terminalProps> = ({
   commandPrompt,
   data,
   handleCommand,
+  color,
 }) => {
   const [value, setValue] = useState<string>("");
   const inputRef = useRef<null | HTMLInputElement>(null);
@@ -27,7 +28,9 @@ const TerminalLine: FC<terminalProps> = ({
     <form onSubmit={handleSubmit}>
       {/* conditionally chnage input and output conditions */}
       {data === "output" && (
-        <p style={{ fontSize: "14px", color: "#6a7282" }}>$ {commandPrompt}</p>
+        <p style={{ fontSize: "14px", color: color || `#6a7282` }}>
+          $ {commandPrompt}
+        </p>
       )}
 
       {data === "input" && (

@@ -3,4 +3,5 @@ export type terminalProps = {
   commandPrompt?: string;
   data: "input" | "output";
   handleCommand?: (command: string) => void;
+  color?: string;
 };

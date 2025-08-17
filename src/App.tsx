@@ -35,26 +35,31 @@ function App() {
             id: crypto.randomUUID(),
             data: "output",
             commandPrompt: "ssh signup - create new account",
+            color: "#00b4d8",
           },
           {
             id: crypto.randomUUID(),
             data: "output",
             commandPrompt: "ssh login - login to account",
+            color: "#00b4d8",
           },
           {
             id: crypto.randomUUID(),
             data: "output",
             commandPrompt: "ssh logout - logout of account",
+            color: "#00b4d8",
           },
           {
             id: crypto.randomUUID(),
             data: "output",
             commandPrompt: "ssh status - check status of your account",
+            color: "#00b4d8",
           },
           {
             id: crypto.randomUUID(),
             data: "output",
             commandPrompt: "ssh themes - change theme status of your terminal",
+            color: "#00b4d8",
           },
         ]);
       },
@@ -90,6 +95,7 @@ function App() {
         id: crypto.randomUUID(),
         data: "output",
         commandPrompt: `Command not found: ${command}`,
+        color: "#fb2c36",
       });
 
       updated.push({
@@ -119,6 +125,7 @@ function App() {
           id={cmd.id}
           data={cmd.data}
           handleCommand={handleCommand}
+          color={cmd.color}
         />
       ))}
     </div>
