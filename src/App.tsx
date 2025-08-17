@@ -66,10 +66,26 @@ function App() {
     const validateCommand = commandAction.find(
       (cmd) => cmd.command === normalizeString
     );
-    // test to get the output
-    if (validateCommand) {
-      validateCommand.action();
-    }
+
+    setCmds((prev) => {
+      const updated = [...prev];
+      const lastInputIndex = [...updated]
+        .reverse()
+        .findIndex((item) => item.data === "input");
+
+      if (lastInputIndex !== -1) {
+        updated.splice(updated.length - 1 - lastInputIndex, 1);
+      }
+
+      updated.push({
+        id: crypto.randomUUID(),
+        data: "output",
+        commandPrompt: command,
+      });
+
+      return updated;
+    });
+
     // setCmds((cmds) => {
     //   const updated = [...cmds];
 
