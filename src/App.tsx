@@ -6,6 +6,7 @@ import type { terminalProps } from "../types";
 // specify color based on what exactly
 
 function App() {
+  const [awaitingSignup, setAwaitingSignup] = useState<boolean>(false);
   // Available commands
   const [cmds, setCmds] = useState<terminalProps[]>([
     {
@@ -101,22 +102,25 @@ function App() {
         commandPrompt: command,
       });
 
-      if (validateCommand) return updated;
-
-      updated.push({
-        id: crypto.randomUUID(),
-        data: "output",
-        commandPrompt: `user account created ${command}`,
-        color: "#4ade80",
-      });
-
-      // if command not found
-      updated.push({
-        id: crypto.randomUUID(),
-        data: "output",
-        commandPrompt: `Command not found: ${command}`,
-        color: "#fb2c36",
-      });
+      if (awaitingSignup) {
+        updated.push({
+          id: crypto.randomUUID(),
+          data: "output",
+          commandPrompt: `Account created for : ${command}`,
+          color: "#4ade80",
+        });
+        setAwaitingSignup(false);
+      } else if (validateCommand) {
+        return updated;
+      } else {
+        // if command not found
+        updated.push({
+          id: crypto.randomUUID(),
+          data: "output",
+          commandPrompt: `Command not found: ${command}`,
+          color: "#fb2c36",
+        });
+      }
 
       updated.push({
         id: crypto.randomUUID(),
@@ -129,6 +133,11 @@ function App() {
     if (validateCommand) {
       setTimeout(() => {
         validateCommand.action();
+
+        // handle condition for ssh signup to trigger state
+        if (validateCommand.command === "ssh signup") {
+          setAwaitingSignup(true);
+        }
         setCmds((prev) => [
           ...prev,
           { id: crypto.randomUUID(), data: "input" },
