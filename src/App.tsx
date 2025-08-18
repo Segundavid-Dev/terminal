@@ -1,12 +1,11 @@
 import { useState } from "react";
 import TerminalLine from "./components/terminal-line";
 import type { terminalProps } from "../types";
-
-// This component enters on mount of the entire app
-// specify color based on what exactly
+import Confetti from "react-confetti";
 
 function App() {
   const [awaitingSignup, setAwaitingSignup] = useState<boolean>(false);
+  const [displayConfetti, setDisplayConfetti] = useState<boolean>(false);
   // Available commands
   const [cmds, setCmds] = useState<terminalProps[]>([
     {
@@ -122,6 +121,12 @@ function App() {
           color: "#4ade80",
         });
         setAwaitingSignup(false);
+        setDisplayConfetti(true);
+
+        // turn off confetti after 5 seconds
+        setTimeout(() => {
+          setDisplayConfetti(false);
+        }, 5000);
       } else if (validateCommand) {
         return updated;
       } else {
@@ -159,6 +164,8 @@ function App() {
   };
   return (
     <div>
+      {/* conditionally render confetti */}
+      {displayConfetti && <Confetti gravity={0.4} />}
       {cmds.map((cmd) => (
         <TerminalLine
           commandPrompt={cmd.commandPrompt}
