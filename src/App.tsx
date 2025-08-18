@@ -78,6 +78,18 @@ function App() {
         ]);
       },
     },
+    {
+      command: "clear",
+      action: () => {
+        setCmds([
+          {
+            id: crypto.randomUUID(),
+            data: "output",
+            commandPrompt: "run `ssh help` to see available commands",
+          },
+        ]);
+      },
+    },
   ];
 
   const handleCommand = (command: string) => {
