@@ -40,12 +40,6 @@ function App() {
           {
             id: crypto.randomUUID(),
             data: "output",
-            commandPrompt: "ssh login - login to account",
-            color: "#00b4d8",
-          },
-          {
-            id: crypto.randomUUID(),
-            data: "output",
             commandPrompt: "ssh logout - logout of account",
             color: "#00b4d8",
           },
@@ -60,6 +54,25 @@ function App() {
             data: "output",
             commandPrompt: "ssh themes - change theme status of your terminal",
             color: "#00b4d8",
+          },
+          {
+            id: crypto.randomUUID(),
+            data: "output",
+            commandPrompt: "clear - clean terminal",
+            color: "#00b4d8",
+          },
+        ]);
+      },
+    },
+    {
+      command: "ssh signup",
+      action: () => {
+        setCmds((prev) => [
+          ...prev,
+          {
+            id: crypto.randomUUID(),
+            data: "output",
+            commandPrompt: "enter username to signup",
           },
         ]);
       },
@@ -89,6 +102,13 @@ function App() {
       });
 
       if (validateCommand) return updated;
+
+      updated.push({
+        id: crypto.randomUUID(),
+        data: "output",
+        commandPrompt: `user account created ${command}`,
+        color: "#4ade80",
+      });
 
       // if command not found
       updated.push({
@@ -133,3 +153,17 @@ function App() {
 }
 
 export default App;
+
+// import { Loader, ArrowRight } from "lucide-react";
+
+// export default function Example() {
+//   return (
+//     <div className="flex gap-6 p-6">
+//       {/* Spinning loader */}
+//       <Loader className="w-8 h-8 animate-spin text-green-500" />
+
+//       {/* Bouncing arrow */}
+//       <ArrowRight className="w-8 h-8 animate-bounce text-blue-500" />
+//     </div>
+//   );
+// }
