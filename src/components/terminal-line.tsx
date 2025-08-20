@@ -51,7 +51,7 @@ const TerminalLine: FC<terminalProps> = ({
         <div
           style={{
             display: "flex",
-            gap: "2px",
+            gap: "8px",
             alignItems: "center",
             fontFamily: "Source Code Pro",
           }}
@@ -64,9 +64,11 @@ const TerminalLine: FC<terminalProps> = ({
             value={value}
             onChange={(e) => setValue(e.target.value)}
             style={{
+              position: "absolute",
+              overflow: "hidden",
+              width: "1px",
+              height: "1px",
               opacity: 0,
-              width: 0,
-              height: 0,
               pointerEvents: "none",
               caretColor: "transparent",
             }}
