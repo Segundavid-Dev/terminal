@@ -34,12 +34,15 @@ const TerminalLine: FC<terminalProps> = ({
       )}
 
       {data === "input" && (
-        <input
-          type="text"
-          ref={inputRef}
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-        />
+        <div style={{ display: "flex", gap: "6px" }}>
+          <span>$</span>
+          <input
+            type="text"
+            ref={inputRef}
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+          />
+        </div>
       )}
     </form>
   );
