@@ -7,3 +7,4 @@ project:
     - [ ] Add confetti effect for signup success
     - [ ] Add control for termial themes based on input
     - [ ] Disable browser's default behavior to prevent the page go up when Up Arrow is pressed
+    - [ ] Add on arrow up click to show history command
