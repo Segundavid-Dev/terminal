@@ -20,6 +20,26 @@ input {
   caret-shape: block;
 }
 
-input:focus {
+/* input:focus {
   caret-color: #00b4d8;
+} */
+
+.caret-block {
+  display: inline-block;
+  width: 1ch;
+  height: 1.2em;
+  background: #00b4d8;
+  animation: blink 1.5s linear infinite;
+  vertical-align: bottom;
+}
+
+@keyframes blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0;
+  }
 }

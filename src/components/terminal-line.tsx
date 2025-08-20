@@ -48,14 +48,41 @@ const TerminalLine: FC<terminalProps> = ({
       )}
 
       {data === "input" && (
-        <div style={{ display: "flex", gap: "6px" }}>
+        <div
+          style={{
+            display: "flex",
+            gap: "2px",
+            alignItems: "center",
+            fontFamily: "Source Code Pro",
+          }}
+        >
           <span>$</span>
+
           <input
             type="text"
             ref={inputRef}
             value={value}
             onChange={(e) => setValue(e.target.value)}
+            style={{
+              opacity: 0,
+              width: 0,
+              height: 0,
+              pointerEvents: "none",
+              caretColor: "transparent",
+            }}
           />
+
+          <pre
+            style={{
+              margin: 0,
+              color: "white",
+              fontFamily: "inherit",
+              fontSize: "14px",
+            }}
+          >
+            {value}
+            <span className="caret-block"></span>
+          </pre>
         </div>
       )}
     </form>
