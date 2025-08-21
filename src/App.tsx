@@ -6,6 +6,7 @@ import Confetti from "react-confetti";
 function App() {
   const [awaitingSignup, setAwaitingSignup] = useState<boolean>(false);
   const [displayConfetti, setDisplayConfetti] = useState<boolean>(false);
+  const [historyCmd, setHistoryCmd] = useState<string[]>([]);
   // Available commands
   const [cmds, setCmds] = useState<terminalProps[]>([
     {
@@ -174,6 +175,8 @@ function App() {
           data={cmd.data}
           handleCommand={handleCommand}
           color={cmd.color}
+          historyCmd={historyCmd}
+          setHistoryCmd={setHistoryCmd}
         />
       ))}
     </div>

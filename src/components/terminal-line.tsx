@@ -7,17 +7,45 @@ const TerminalLine: FC<terminalProps> = ({
   data,
   handleCommand,
   color,
+  historyCmd,
+  setHistoryCmd,
 }) => {
   const [value, setValue] = useState<string>("");
   const inputRef = useRef<null | HTMLInputElement>(null);
-
+  const [historyIndex, setHistoryIndex] = useState<number | null>(null);
   useEffect(() => {
-    const handleKeyDown = () => {
+    const handleKeyDown = (e: KeyboardEvent) => {
       inputRef?.current?.focus();
+
+      if (e.key === "ArrowUp") {
+        setHistoryIndex((prev) => {
+          let newIndex = prev;
+          if (historyCmd) {
+            newIndex =
+              prev === null ? historyCmd?.length - 1 : Math.max(prev - 1, 0);
+            setValue(historyCmd[newIndex] || "");
+          }
+          return newIndex;
+        });
+      } else if (e.key === "ArrowDown") {
+        setHistoryIndex((prev) => {
+          let newIndex = prev;
+          if (prev === null) return null;
+
+          if (historyCmd) {
+            newIndex = Math.min(prev + 1, historyCmd?.length - 1);
+            setValue(historyCmd[newIndex] || "");
+          }
+          return newIndex;
+        });
+      }
     };
+
+    // handle body click event
     const handleBodyClick = () => {
       inputRef?.current?.focus();
     };
+    // automatic input focus on mount
     inputRef?.current?.focus();
 
     document.body.addEventListener("click", handleBodyClick);
@@ -27,15 +55,19 @@ const TerminalLine: FC<terminalProps> = ({
       window.removeEventListener("keydown", handleKeyDown);
       document.body.removeEventListener("click", handleBodyClick);
     };
-  }, []);
+  }, [historyCmd]);
 
   const handleSubmit = (e: FormEvent) => {
-    setValue("");
     e.preventDefault();
-    // guard check to handle undefined error
+    if (!value.trim()) return;
+
+    console.log(historyCmd);
+
     if (handleCommand) {
       handleCommand(value);
+      setHistoryCmd?.((prev) => [...prev, value]);
     }
+    setValue("");
   };
 
   return (
@@ -66,11 +98,7 @@ const TerminalLine: FC<terminalProps> = ({
             style={{
               position: "absolute",
               overflow: "hidden",
-              width: "1px",
-              height: "1px",
-              opacity: 0,
-              pointerEvents: "none",
-              caretColor: "transparent",
+              left: "-9999px",
             }}
           />
 
@@ -85,6 +113,8 @@ const TerminalLine: FC<terminalProps> = ({
             {value}
             <span className="caret-block"></span>
           </pre>
+
+          {/* testout the button up arrow functionality */}
         </div>
       )}
     </form>
