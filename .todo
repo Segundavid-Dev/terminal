@@ -4,7 +4,7 @@ project:
     - [x] Automatically set the input to be last index in Array
     - [x] Add more control for invalid input
     - [x] Add color to different different command status (red ->   invalid command, blue for output help command prompts, green for account created successfully)
-    - [ ] Add confetti effect for signup success
+    - [x] Add confetti effect for signup success
     - [ ] Add control for termial themes based on input
     - [ ] Disable browser's default behavior to prevent the page go up when Up Arrow is pressed
-    - [ ] Add on arrow up click to show history command
+    - [x] Add on arrow up click to show history command

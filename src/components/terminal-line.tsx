@@ -13,6 +13,7 @@ const TerminalLine: FC<terminalProps> = ({
   const [value, setValue] = useState<string>("");
   const inputRef = useRef<null | HTMLInputElement>(null);
   const [historyIndex, setHistoryIndex] = useState<number | null>(null);
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       inputRef?.current?.focus();
@@ -20,10 +21,10 @@ const TerminalLine: FC<terminalProps> = ({
       if (e.key === "ArrowUp") {
         setHistoryIndex((prev) => {
           let newIndex = prev;
-          if (historyCmd) {
+          if (historyCmd?.length) {
             newIndex =
               prev === null ? historyCmd?.length - 1 : Math.max(prev - 1, 0);
-            setValue(historyCmd[newIndex] || "");
+            setValue(historyCmd[newIndex] ? `${historyCmd[newIndex]}` : "");
           }
           return newIndex;
         });
@@ -68,6 +69,7 @@ const TerminalLine: FC<terminalProps> = ({
       setHistoryCmd?.((prev) => [...prev, value]);
     }
     setValue("");
+    setHistoryIndex(null);
   };
 
   return (
@@ -94,7 +96,13 @@ const TerminalLine: FC<terminalProps> = ({
             type="text"
             ref={inputRef}
             value={value}
-            onChange={(e) => setValue(e.target.value)}
+            onChange={(e) => {
+              setValue(e.target.value);
+              setHistoryIndex(null);
+            }}
+            onKeyDown={() => {
+              setHistoryIndex(null);
+            }}
             style={{
               position: "absolute",
               overflow: "hidden",
